@@ -4,8 +4,10 @@ using System.Text;
 
 namespace HX711DotNet
 {
-    public interface IHX711Factory
+  using System.Device.Gpio;
+
+  public interface IHX711Factory
     {
-        IHX711 GetHX711(int dout, int pdSck);        
+        IHX711 GetHX711(GpioController controller, int dout, int pdSck);        
     }
 }

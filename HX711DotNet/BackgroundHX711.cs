@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace HX711DotNet
 {
-    public class BackgroundHX711
+  using System.Device.Gpio;
+
+  public class BackgroundHX711
     {
         private IHX711Factory _factory;
         private IHX711 _hx711;
@@ -14,7 +16,7 @@ namespace HX711DotNet
         public BackgroundHX711(IHX711Factory factory, int dout, int pdSck, int delay = 100)
         {
             _factory = factory;
-            _hx711 = _factory.GetHX711((byte)dout, (byte)pdSck);
+            _hx711 = _factory.GetHX711(new GpioController(), (byte)dout, (byte)pdSck);
             Delay = delay;
             _running = false;
         }
