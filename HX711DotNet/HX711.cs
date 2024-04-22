@@ -65,7 +65,6 @@ namespace HX711DotNet
 
       Offet = 1;
       OffsetB = 1;
-      _lastVal = 0;
 
       DebugPrinting = false;
 
@@ -234,7 +233,7 @@ namespace HX711DotNet
         while (!IsReady())
         {
           //pass
-          Thread.Yield();
+          Thread.Sleep(1);
         }
 
         // Read three bytes of data from the HX711.
@@ -285,9 +284,7 @@ namespace HX711DotNet
 
       //Convert from 24bit twos-complement to a signed value.
       int signedIntValue = this.convertFromTwosComplement24bit(twosComplementValue);
-
-      //Record the latest sample value we've read.
-      _lastVal = signedIntValue;
+      
       //Return the sample value we've read from the HX711.
       return signedIntValue;
     }
